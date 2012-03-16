@@ -4,7 +4,7 @@ This is a node.js module for <http://spreedly.com> Payments API. It aims to be c
 
 # Compatibility
 
-This project has been tested with node.js 0.6.12.
+This project has been tested with node.js 0.6.10.
 
 Testing with earlier versions of Node.js planned.
 

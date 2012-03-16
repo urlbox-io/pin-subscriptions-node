@@ -2,7 +2,7 @@
 	"name":				"spreedly-node"
 	, "description":	"A spreedly client library for Node.js"
 	, "keywords":		[ "spreedly", "payment", "subscribe", "plan", "recurring" ]
-	, "version":		"0.1"
+	, "version":		"0.1.0"
 	, "author":			"Rad Gruchalski @rad_g"
 	, "repository":	{
 		"type":			"git"
@@ -14,7 +14,7 @@
 	, "main":			"./lib/spreedly/spreedly"
 	, "directories": {
 		"lib":			"./lib/spreedly" }
-		, "engines":	{ "node" : ">=0.6.12" }
+		, "engines":	{ "node" : ">=0.6.10" }
 	, "licenses": [ {
 		"type":			"Apache License, Version 2.0"
 		, "url":		"http://www.apache.org/licenses/LICENSE-2.0" } ]
