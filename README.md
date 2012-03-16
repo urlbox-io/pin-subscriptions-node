@@ -7,5 +7,7 @@ This is a node.js module for <http://spreedly.com> Payments API. It aims to be c
 This project has been tested with node.js 0.6.12.
 
 # Installation
-
+	
+	npm install spreedly-node
+	
 # Usage
