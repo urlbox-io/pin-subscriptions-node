@@ -41,7 +41,7 @@ There is 1 implementation detail that differs from the original Payments API.
 		util = require("util");
 	
 	var cli = new Spreedly(site_name, api_key);
-	var subscriber = { client_id: 100, screen_name: "some name", email: "some@email.com" };
+	var subscriber = { customer_id: 100, screen_name: "some name", email: "some@email.com" };
 	cli.getSubscriptionPlans( function(result) {
 		var plans = result;
 		cli.createSubscriber( subscriber, function( error, result ) {
@@ -61,42 +61,10 @@ There is 1 implementation detail that differs from the original Payments API.
 		} );
 	} );
 
-# Supported operations
-
-## getSubscriber( subscriber_id, callback )
-Errors codes:
-
-	- subscriber_not_found
-
-## createSubscriber( subscriber, callback )
-	
-	- subscriber: required, object
-	- callback - function( error, result )
-
-## updateSubscriber( id, subscriber, callback )
-
-## changeSubscriberId( id, new_id, callback )
-## updatePaymentCreditCardInfo( id, credit_card, billing_info, callback )
-## addStoreCredit( subscriber_id, amount, callback )
-## addComplimentarySubscription( subscriber_id, quantity, units, amount, feature_level, callback )
-## addComplimentaryExtension( subscriber_id, quantity, units, callback )
-## addLifetimeComplimentarySubscription( subscriber_id, feature_level, callback )
-## addSubscriberFee( subscriber_id, name, description, group, amount, callback )
-## stopAutoRenew( subscriber_id, callback )
-## subscribeToFreeTrial( subscriber_id, plan_id, callback )
-## extendFreeTrial( subscriber_id, callback )
-## changeSubscriptionPlan( subscriber_id, new_plan_id, callback )
-## clearLifeTimeSubscription( subscriber_id, callback )
-## raiseInvoice( plan_id, subscriber, callback )
-## payWithCreditCard( invoice_id, credit_card, billing_info, callback )
-## payWithOnFilePayment( invoice_id, callback )
-## payWithStoreCredit( invoice_id, callback )
-## payWithGenralCredit( invoice_id, description, callback )
-## getSubscriptionPlans( callback )
-## getTransactions( since, callback )
-## testSite_deleteSubscribers( callback )
-## testSite_deleteSubscriber( subscriber_id, callback )
-
 # License
 
 Apache License, Version 2.0<br/><http://www.apache.org/licenses/LICENSE-2.0>
+
+# Left to test
+
+addComplimentarySubscription

@@ -1,0 +1,34 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'install', '.' ]
+info using npm@1.1.0-3
+info using node@v0.6.10
+verbose config file /Users/rad/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose config file /usr/local/lib/node_modules/npm/npmrc
+verbose caching /Users/rad/dev/my/spreedly/package.json
+verbose loadDefaults spreedly-node@0.1.0
+verbose caching /Users/rad/dev/my/spreedly/node_modules/nodeunit/package.json
+verbose loadDefaults nodeunit@0.7.4
+verbose caching /Users/rad/dev/my/spreedly/node_modules/xml2json/package.json
+verbose loadDefaults xml2json@0.2.4
+verbose from cache /Users/rad/dev/my/spreedly/package.json
+verbose cache add [ '.', null ]
+silly cache add: name, spec, args [ undefined, '.', [ '.', null ] ]
+verbose parsed url { pathname: '.', path: '.', href: '.' }
+ERR! Could not install: .
+ERR! Error: ENOENT, no such file or directory 'package.json'
+ERR! You may report this log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Darwin 11.3.0
+ERR! command "node" "/usr/local/bin/npm" "install" "."
+ERR! cwd /Users/rad/dev/my/spreedly/test
+ERR! node -v v0.6.10
+ERR! npm -v 1.1.0-3
+ERR! path package.json
+ERR! code ENOENT
+ERR! message ENOENT, no such file or directory 'package.json'
+ERR! errno {}
+verbose exit [ 1, true ]
