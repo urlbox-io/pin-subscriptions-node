@@ -64,7 +64,3 @@ There is 1 implementation detail that differs from the original Payments API.
 # License
 
 Apache License, Version 2.0<br/><http://www.apache.org/licenses/LICENSE-2.0>
-
-# Left to test
-
-addComplimentarySubscription
