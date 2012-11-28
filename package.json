@@ -10,7 +10,7 @@
 	, "bugs": {
 		"url":			"http://github.com/radekg/spreedly-node/issues" }
 	, "dependencies": {
-		"xml2json": 	"0.2.4" }
+		"xml2json": 	"x.x.x" }
 	, "devDependencies": {
 		"nodeunit": 	"0.7.4" }
 	, "main":			"./lib/spreedly/spreedly"
