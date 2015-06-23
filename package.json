@@ -1,5 +1,5 @@
 {
-  "name": "spreedly-node",
+  "name": "spreedly-node-urlbox",
   "description": "A spreedly client library for Node.js",
   "keywords": [
     "spreedly",
