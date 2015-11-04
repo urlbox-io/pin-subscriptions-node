@@ -1,22 +1,16 @@
-# spreedly-node
+# pin-subscriptions-node
 
-This is a node.js module for <http://spreedly.com> Payments API. It aims to be compatible with API v4 - <https://spreedly.com/manual/integration-reference/>.
-
-# Compatibility
-
-This project has been tested with node.js 0.6.10.
-
-Testing with earlier versions of Node.js planned.
+This is a node.js module for <http://https://subs.pinpayments.com> Payments API. It aims to be compatible with API v4 - <https://https://subs.pinpayments.com/manual/integration-reference/>.
 
 # Installation
 	
-	npm install spreedly-node
+	npm install pin-subscriptions-node
 	
 # Usage
 	
-	var Spreedly = require("spreedly-node").Spreedly;
+	var Pin = require("pin-subscriptions-node").Pin;
 	…
-	var cli = new Spreedly( site_name, api_key );
+	var cli = new Pin( site_name, api_key );
 
 # Handling errors
 
@@ -37,10 +31,10 @@ There is 1 implementation detail that differs from the original Payments API.
 
 # Sample app
 
-	var Spreedly = require("spreedly-node").Spreedly
+	var Pin = require("pin-subscriptions-node").Pin
 		util = require("util");
 	
-	var cli = new Spreedly(site_name, api_key);
+	var cli = new Pin(site_name, api_key);
 	var subscriber = { customer_id: 100, screen_name: "some name", email: "some@email.com" };
 	cli.getSubscriptionPlans( function(result) {
 		var plans = result;

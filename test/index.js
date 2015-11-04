@@ -2,7 +2,7 @@ var testCase = require('nodeunit').testCase
     , util = require('util')
     , debug = require('util').debug
     , inspect = require('util').inspect
-    , spreedly = require('../lib/spreedly/spreedly').Spreedly;
+    , pin = require('../lib/pin/pin').Pin;
 
 var client = null;
 var site_name = process.env['SITE_NAME'] || "";
@@ -10,7 +10,7 @@ var api_key = process.env['API_KEY'] || "";
 
 exports.setUp = function (callback) {
     var self = exports;
-    client = new spreedly(site_name, api_key);
+    client = new pin(site_name, api_key);
     callback();
 };
 
@@ -22,7 +22,7 @@ exports.tearDown = function (callback) {
 }
 
 exports.shouldReturnPlans = function (test) {
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.getSubscriptionPlans(function (result) {
         test.ok(typeof result == "object" && typeof result.push == "function", "Result should be an array of plans.");
         test.done();
@@ -30,7 +30,7 @@ exports.shouldReturnPlans = function (test) {
 };
 
 exports.updateSubscriber = function (test) {
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({
         customer_id: 115,
         screen_name: "test_user_2",
@@ -49,7 +49,7 @@ exports.updateSubscriber = function (test) {
 };
 
 exports.runCreateInvoiceCCPaymentProcess = function (test) {
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 110, screen_name: "test_user"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
 
@@ -85,7 +85,7 @@ exports.runCreateInvoiceCCPaymentProcess = function (test) {
 };
 
 exports.runCreateInvoiceStoreCreditPaymentProcess = function (test) {
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 111, screen_name: "test_user_2"}, function (error, subscriber) {
 
         test.equals(null, error, "createSubscriber: Error should be null");
@@ -116,7 +116,7 @@ exports.runCreateInvoiceStoreCreditPaymentProcess = function (test) {
 };
 
 exports.runCreateInvoiceOnFilePaymentProcess = function (test) {
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 112, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.getSubscriber(112, function (error, subscriber) {
@@ -143,7 +143,7 @@ exports.runCreateInvoiceOnFilePaymentProcess = function (test) {
 };
 
 exports.runCreateInvoiceGenericCreditPaymentProcess = function (test) {
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 113, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.getSubscriber(113, function (error, subscriber) {
@@ -168,7 +168,7 @@ exports.runCreateInvoiceGenericCreditPaymentProcess = function (test) {
 };
 
 exports.changeSubscriptionPlan = function (test) {
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 114, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.getSubscriber(114, function (error, subscriber) {
@@ -198,7 +198,7 @@ exports.changeSubscriptionPlan = function (test) {
 
 
 exports.changeSubscriberId = function (test) {
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({
         customer_id: 130,
         screen_name: "test_user_2",
@@ -217,7 +217,7 @@ exports.changeSubscriberId = function (test) {
 };
 
 exports.updatePaymentCreditCard = function (test) { // requires a recurring subscription
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 116, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.getSubscriber(116, function (error, subscriber) {
@@ -257,7 +257,7 @@ exports.updatePaymentCreditCard = function (test) { // requires a recurring subs
 };
 
 exports.addSubscriberFee = function (test) { // recuires a recurring plan
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 117, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.getSubscriber(117, function (error, subscriber) {
@@ -285,7 +285,7 @@ exports.addSubscriberFee = function (test) { // recuires a recurring plan
 };
 
 exports.freeTrials = function (test) { // recuires a free trial plan
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 118, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.getSubscriptionPlans(function (plans) {
@@ -301,7 +301,7 @@ exports.freeTrials = function (test) { // recuires a free trial plan
 };
 
 exports.stopAutorenew = function (test) { // recuires a recurring plan
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 118, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.getSubscriber(118, function (error, subscriber) {
@@ -329,7 +329,7 @@ exports.stopAutorenew = function (test) { // recuires a recurring plan
 };
 
 exports.lifetimeSubscriptions = function (test) { // recuires a free trial plan
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 119, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.addLifetimeComplimentarySubscription(119, "pro", function (error) {
@@ -343,7 +343,7 @@ exports.lifetimeSubscriptions = function (test) { // recuires a free trial plan
 };
 
 exports.complimentaryExtension = function (test) { // recuires a recurring plan
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 120, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.getSubscriber(120, function (error, subscriber) {
@@ -371,7 +371,7 @@ exports.complimentaryExtension = function (test) { // recuires a recurring plan
 };
 
 exports.complimentarySubscription = function (test) { // recuires a recurring plan
-    var cli = new spreedly(site_name, api_key);
+    var cli = new pin(site_name, api_key);
     cli.createSubscriber({customer_id: 130, screen_name: "test_user_2"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
         cli.addComplimentarySubscription(130, 2, "months", "pro", function (error, subscriber) {

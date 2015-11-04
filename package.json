@@ -1,34 +1,42 @@
 {
-  "name": "spreedly-node-urlbox",
-  "description": "A spreedly client library for Node.js",
+  "name": "pin-subscriptions-node",
+  "description": "A pin subscriptions (formerly Spreedly) client library for Node.js",
   "keywords": [
     "spreedly",
     "payment",
     "subscribe",
     "plan",
-    "recurring"
+    "recurring",
+    "pin",
+    "pinpayments",
+    "subscriptions"
   ],
   "version": "0.1.0",
-  "author": "Rad Gruchalski @rad_g",
+  "author": "Ankur Gurha",
   "repository": {
     "type": "git",
-    "url": "http://github.com/radekg/spreedly-node.git"
+    "url": "https://github.com/agurha/pin-subscriptions-node.git"
   },
   "bugs": {
-    "url": "http://github.com/radekg/spreedly-node/issues"
+    "url": "https://github.com/agurha/pin-subscriptions-node/issues"
   },
   "dependencies": {
-    "xml2json": "latest"
+    "xml2json": "0.9.0"
   },
-  "main": "./lib/spreedly/spreedly",
+  "main": "./lib/pin/pin",
   "directories": {
-    "lib": "./lib/spreedly"
+    "lib": "./lib/pin"
   },
-  "engines": {"node": ">=10.0.x"},
+  "engines": {
+    "node": ">=10.0.x"
+  },
   "licenses": [
     {
       "type": "Apache License, Version 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
-  ]
+  ],
+  "devDependencies": {
+    "nodeunit": "^0.9.1"
+  }
 }
