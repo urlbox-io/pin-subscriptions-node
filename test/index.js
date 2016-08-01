@@ -69,7 +69,7 @@ exports.runCreateInvoiceCCPaymentProcess = function (test) {
                         , card_type: "visa"
                         , verification_value: 234
                         , month: 1
-                        , year: 2016
+                        , year: 2020
                         , first_name: "Joe"
                         , last_name: "Doe"
                     };
@@ -117,24 +117,49 @@ exports.runCreateInvoiceStoreCreditPaymentProcess = function (test) {
 
 exports.runCreateInvoiceOnFilePaymentProcess = function (test) {
     var cli = new pin(site_name, api_key);
-    cli.createSubscriber({customer_id: 112, screen_name: "test_user_2"}, function (error, subscriber) {
+    cli.createSubscriber({customer_id: 112, screen_name: "test_user"}, function (error, subscriber) {
         test.equals(null, error, "createSubscriber: Error should be null");
-        cli.getSubscriber(112, function (error, subscriber) {
-            test.equals(null, error, "getSubscriber: Error should be null");
-            //test.equals(112, subscriber.customer_id);
-            cli.getSubscriptionPlans(function (plans) {
-                cli.raiseInvoice(plans[1].id, {
-                    customer_id: 112,
-                    screen_name: "test_user_2",
-                    email: "test2@test.com"
-                }, function (error, invoice) {
-                    test.equals(null, error)
-                    cli.payWithOnFilePayment(invoice.token, function (error, invoice) {
-                        test.equals(null, error);
-                        if (invoice) {
-                            test.ok(invoice.closed);
-                        }
-                        test.done();
+        console.log('ok', error);
+        cli.getSubscriptionPlans(function (plans) {
+            console.log('ok 2')
+            cli.raiseInvoice(plans[1].id, {
+                customer_id: 112,
+                screen_name: "test_user",
+                email: "test@test.com"
+            }, function (error, invoice) {
+                console.log('ok 3', error)
+                test.equals(null, error);
+                var cc = {
+                    number: "4222222222222"
+                    , card_type: "visa"
+                    , verification_value: 234
+                    , month: 1
+                    , year: 2020
+                    , first_name: "Joe"
+                    , last_name: "Doe"
+                };
+                cli.payWithCreditCard(invoice.token, cc, null, function (error, invoice) {
+                    console.log('ok 4', error)
+                    test.equals(null, error);
+                    test.ok(invoice.closed)
+                    cli.raiseInvoice(plans[1].id, {
+                        customer_id: 112, 
+                        screen_name: "test_user",
+                        email: "test@test.com"
+                    }, function (error, invoice) {
+                        cli.getSubscriber(112, function (error, subscriber) {
+                            console.log('ok 1', error, subscriber);
+                            test.equals(null, error, "getSubscriber: Error should be null");
+        //test.equals(110, subscriber.customer_id); //TODO : ???
+                            console.log('ok 4', error);
+                            test.equals(null, error);
+                            cli.payWithOnFilePayment(invoice.token, function (error, invoice) {
+                                console.log('ok 6', error);
+                                test.equals(null, error);
+                                test.ok(invoice.closed);
+                                test.done();
+                            });
+                        });
                     });
                 });
             });
@@ -156,7 +181,7 @@ exports.runCreateInvoiceGenericCreditPaymentProcess = function (test) {
                     email: "test2@test.com"
                 }, function (error, invoice) {
                     test.equals(null, error)
-                    cli.payWithGenralCredit(invoice.token, "general credit test", function (error, invoice) {
+                    cli.payWithGeneralCredit(invoice.token, "general credit test", function (error, invoice) {
                         test.equals(null, error, JSON.stringify(error));
                         test.ok(invoice.closed);
                         test.done();
@@ -181,7 +206,7 @@ exports.changeSubscriptionPlan = function (test) {
                     email: "test2@test.com"
                 }, function (error, invoice) {
                     test.equals(null, error)
-                    cli.payWithGenralCredit(invoice.token, "general credit test", function (error, invoice) {
+                    cli.payWithGeneralCredit(invoice.token, "general credit test", function (error, invoice) {
                         test.equals(null, error, JSON.stringify(error));
                         test.ok(invoice.closed);
                         cli.changeSubscriptionPlan(114, plans[1].id, function (error) {
@@ -230,7 +255,7 @@ exports.updatePaymentCreditCard = function (test) { // requires a recurring subs
                     email: "test2@test.com"
                 }, function (error, invoice) {
                     test.equals(null, error)
-                    cli.payWithGenralCredit(invoice.token, "general credit test", function (error, invoice) {
+                    cli.payWithGeneralCredit(invoice.token, "general credit test", function (error, invoice) {
                         test.equals(null, error, JSON.stringify(error));
                         test.ok(invoice.closed);
 
@@ -239,7 +264,7 @@ exports.updatePaymentCreditCard = function (test) { // requires a recurring subs
                             , card_type: "visa"
                             , verification_value: 234
                             , month: 1
-                            , year: 2016
+                            , year: 2020
                             , first_name: "Joe"
                             , last_name: "Doe"
                         };
@@ -248,7 +273,6 @@ exports.updatePaymentCreditCard = function (test) { // requires a recurring subs
                             test.equals(null, error, JSON.stringify(error));
                             test.done();
                         });
-
                     });
                 });
             });
@@ -270,7 +294,7 @@ exports.addSubscriberFee = function (test) { // recuires a recurring plan
                     email: "test2@test.com"
                 }, function (error, invoice) {
                     test.equals(null, error)
-                    cli.payWithGenralCredit(invoice.token, "general credit test", function (error, invoice) {
+                    cli.payWithGeneralCredit(invoice.token, "general credit test", function (error, invoice) {
                         test.equals(null, error, JSON.stringify(error));
                         test.ok(invoice.closed);
                         cli.addSubscriberFee(117, "Test fee", "Description for test fee", "test_grouqp", 50.91, function (error) {
@@ -314,7 +338,7 @@ exports.stopAutorenew = function (test) { // recuires a recurring plan
                     email: "test2@test.com"
                 }, function (error, invoice) {
                     test.equals(null, error)
-                    cli.payWithGenralCredit(invoice.token, "general credit test", function (error, invoice) {
+                    cli.payWithGeneralCredit(invoice.token, "general credit test", function (error, invoice) {
                         test.equals(null, error, JSON.stringify(error));
                         test.ok(invoice.closed);
                         cli.stopAutoRenew(118, function (error) {
@@ -356,7 +380,7 @@ exports.complimentaryExtension = function (test) { // recuires a recurring plan
                     email: "test2@test.com"
                 }, function (error, invoice) {
                     test.equals(null, error)
-                    cli.payWithGenralCredit(invoice.token, "general credit test", function (error, invoice) {
+                    cli.payWithGeneralCredit(invoice.token, "general credit test", function (error, invoice) {
                         test.equals(null, error, JSON.stringify(error));
                         test.ok(invoice.closed);
                         cli.addComplimentaryExtension(120, 2, "months", function (error, subscriber) {
@@ -377,6 +401,41 @@ exports.complimentarySubscription = function (test) { // recuires a recurring pl
         cli.addComplimentarySubscription(130, 2, "months", "pro", function (error, subscriber) {
             test.equals(null, error, JSON.stringify(error));
             test.done();
+        });
+    });
+};
+
+exports.getSubscriber = function(test) {
+    var cli = new pin(site_name, api_key);
+    cli.createSubscriber({customer_id: 140, screen_name: "test_user_2"}, function (error, subscriber) {
+        test.equals(null, error, "createSubscriber: Error should be null");
+        console.log('ok1', error);
+        cli.getSubscriptionPlans(function(plans) {
+            cli.raiseInvoice(plans[1].id, {
+                customer_id: 140,
+                screen_name: "test_user_2",
+                email: "test2@test.com"
+            }, function (error, invoice) {
+                console.log('ok2', error);
+                test.equals(null, error);
+                cli.payWithGeneralCredit(invoice.token, "general credit test", function (error, invoice) {
+
+                    cli.getSubscriber(140, function(error, subscriber) {
+                        console.log('ok3', error);
+                        test.equals(null, error, JSON.stringify(error));
+                        console.log('ok4', error);
+                        test.notEqual(null, subscriber.subscription_plan_version, "expected subscriber.subscription_plan_version not to be null");
+                        console.log('ok5', error);
+                        try{
+                            test.equals(plans[1].id, subscriber.subscription_plan_version.subscription_plan_id, "expected subscriber.subscription_plan_version.subscribtion_plan_id to equal the plan id");
+                            console.log(plans[1].id, subscriber.subscription_plan_version.subscription_plan_id, "expected subscriber.subscription_plan_version.subscribtion_plan_id to equal the plan id");
+                        } catch(e){
+                            console.log('ok6', error, e);
+                            test.done();
+                        }
+                    });
+                });
+            });
         });
     });
 };
